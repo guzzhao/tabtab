@@ -13,10 +13,6 @@ function updateSearchSuggsetion(k, v) {
   searchSuggestion.value[k] = v
 }
 provide('searchSuggestion', { searchSuggestion, updateSearchSuggsetion })
-
-watch(searchSuggestion, (newT) => {
-  console.log(newT)
-}, { deep: true })
 </script>
 
 <template>
