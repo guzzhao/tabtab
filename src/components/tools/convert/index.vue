@@ -1,7 +1,14 @@
 <script setup>
 import { useDateFormat, useFullscreen, useNow } from '@vueuse/core'
+import Show from './show.vue'
+import { SRARCH_URL } from '~/utils/const'
 
 const searchText = defineModel()
+
+function searchOpen(t) {
+  const baseUrl = SRARCH_URL[t].url
+  chrome.tabs.create({ url: baseUrl.replace('{query}', searchText.value), active: true })
+}
 </script>
 
 <template>
@@ -10,7 +17,15 @@ const searchText = defineModel()
       <n-input v-model:value="searchText" type="text" size="tiny" placeholder="Tiny Input" />
     </template>
     <n-space>
-      <n-button>Default</n-button>
+      <n-button @click="searchOpen('baidu')">
+        百度
+      </n-button>
+      <n-button @click="searchOpen('bing')">
+        Bing
+      </n-button>
+      <n-button @click="searchOpen('google')">
+        谷歌
+      </n-button>
       <n-button type="tertiary">
         哈希
       </n-button>
@@ -23,13 +38,12 @@ const searchText = defineModel()
       <n-button type="success">
         变量名
       </n-button>
-      <n-button type="warning">
-        颜色
-      </n-button>
+
       <n-button type="error">
         数学计算
       </n-button>
     </n-space>
+    <Show foo="math" :search-text />
     <template #footer>
       尾部
     </template>

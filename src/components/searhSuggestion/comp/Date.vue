@@ -2,9 +2,9 @@
 import { useClipboard, useDateFormat, useNow } from '@vueuse/core'
 import Base from '../Base.vue'
 import { isDate, isTimestamp } from '~/utils/util'
-import { search_suggestion } from '~/logic'
 
 const props = defineProps(['text'])
+const { searchSuggestion, updateSearchSuggsetion } = inject('searchSuggestion')
 
 const msg = useMessage()
 
@@ -12,16 +12,15 @@ const now = useNow()
 
 const timestamp = computed(() => {
   if (isDate(props.text)) {
-    search_suggestion.value.Date = true
+    updateSearchSuggsetion('Date', true)
     return new Date(props.text).getTime()
   }
-
   else if (isTimestamp(props.text)) {
-    search_suggestion.value.Date = true
+    updateSearchSuggsetion('Date', true)
     return Number(props.text)
   }
   else {
-    search_suggestion.value.Date = false
+    updateSearchSuggsetion('Date', false)
     return ''
   }
 })

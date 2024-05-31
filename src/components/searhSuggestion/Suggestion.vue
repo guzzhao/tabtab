@@ -3,23 +3,28 @@ import Base64 from './comp/Base64.vue'
 import Date from './comp/Date.vue'
 import Var from './comp/Var.vue'
 import { isBase64, isDate, isTimestamp, isVar } from '~/utils/util'
-import { search_suggestion } from '~/logic'
 
 const props = defineProps(['searchText'])
 
 const searchText = computed(() => props.searchText)
 
-watch(searchText, (newT) => {
+const searchSuggestion = ref({})
+function updateSearchSuggsetion(k, v) {
+  searchSuggestion.value[k] = v
+}
+provide('searchSuggestion', { searchSuggestion, updateSearchSuggsetion })
+
+watch(searchSuggestion, (newT) => {
   console.log(newT)
-})
+}, { deep: true })
 </script>
 
 <template>
   <div class="recommend mt-2">
     <div class="bg-white p-1">
-      <Base64 v-show="search_suggestion && search_suggestion.Base64" :text="searchText" />
-      <Date v-show="search_suggestion && search_suggestion.Date" :text="searchText" />
-      <Var v-show="search_suggestion && search_suggestion.Var" :text="searchText" />
+      <Base64 v-show="searchSuggestion && searchSuggestion.Base64" :text="searchText" />
+      <Date v-show="searchSuggestion && searchSuggestion.Date" :text="searchText" />
+      <Var v-show="searchSuggestion && searchSuggestion.Var" :text="searchText" />
       <n-space>
         <div>
           <span class="i-ri-baidu-fill">Baidu</span>

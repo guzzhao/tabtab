@@ -6,6 +6,8 @@ import { search_config } from '~/logic/storage'
 const showModal = ref(false)
 
 const searchText = ref('')
+provide('searchText', searchText)
+
 const message = useMessage()
 
 const searchType = computed(() => {

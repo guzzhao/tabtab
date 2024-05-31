@@ -8,7 +8,7 @@ const img = ref('url(https://w.wallhaven.cc/full/jx/wallhaven-jxl31y.png)')
 <template>
   <div class="base">
     <div class="flex flex-col justify-center items-center ">
-      <div class="head h-40" />
+      <div class="head h-20" />
       <Time />
       <Search />
       <Expand />

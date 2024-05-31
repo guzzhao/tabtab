@@ -5,8 +5,4 @@ export const search_config = useWebExtensionStorage('searchHistory', {
   search_engine: 'baidu',
 })
 
-export const search_suggestion = useWebExtensionStorage('search_suggestion', {
-  Base64: false,
-})
-
 export const fullscreen = useWebExtensionStorage('fullscreen', false)

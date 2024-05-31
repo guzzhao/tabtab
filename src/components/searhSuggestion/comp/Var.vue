@@ -3,19 +3,20 @@ import { useClipboard } from '@vueuse/core'
 import Base from '../Base.vue'
 import { isVar } from '~/utils/util'
 import { variateArrayTo_AA_BB, variateArrayTo_AbBb, variateArrayTo_aa0bb, variateArrayTo_aa_bb, variateArrayTo_abBb } from '~/utils/strUtil'
-import { search_suggestion } from '~/logic'
 
 const props = defineProps(['text'])
+
+const { searchSuggestion, updateSearchSuggsetion } = inject('searchSuggestion')
 
 const msg = useMessage()
 
 const varText = computed(() => {
   if (isVar(props.text)) {
-    search_suggestion.value.Var = true
+    updateSearchSuggsetion('Var', true)
     return props.text
   }
   else {
-    search_suggestion.value.Var = false
+    updateSearchSuggsetion('Var', false)
     return ''
   }
 })
