@@ -1,9 +1,32 @@
 <script setup>
 import { useDateFormat, useFullscreen, useNow } from '@vueuse/core'
-import Show from './show.vue'
 import { SRARCH_URL } from '~/utils/const'
 
 const searchText = defineModel()
+const type = ref('')
+
+const props = defineProps(['foo'])
+
+const modules = import.meta.glob('./module/*.vue')
+
+const components = ref({})
+
+const comName = Object.entries(modules).map(([path]) => path.replace(/\.\/module\/(.*)\.vue/, '$1'))
+
+Object.entries(modules).forEach(([path, asyncCom]) => {
+  const name = path.replace(/\.\/module\/(.*)\.vue/, '$1')
+  components.value[name] = markRaw(defineAsyncComponent(asyncCom))
+})
+
+
+
+function funChange(t1) {
+  type.value = t1
+}
+
+
+
+
 
 function searchOpen(t) {
   const baseUrl = SRARCH_URL[t].url
@@ -26,24 +49,25 @@ function searchOpen(t) {
       <n-button @click="searchOpen('google')">
         谷歌
       </n-button>
-      <n-button type="tertiary">
+      <n-button type="tertiary" @click="funChange('hash')">
         哈希
       </n-button>
-      <n-button type="primary">
+      <n-button type="primary" @click="funChange('base64')">
         Base64
       </n-button>
-      <n-button type="info">
+      <n-button type="info" @click="funChange('time')">
         时间日期
       </n-button>
-      <n-button type="success">
+      <n-button type="success" @click="funChange('var')">
         变量名
       </n-button>
-
-      <n-button type="error">
+      <n-button type="error" @click="funChange('math')">
         数学计算
       </n-button>
     </n-space>
-    <Show foo="math" :search-text />
+    <div v-for="(item, index) in comName" :key="index">
+      <component :is="components[item]" v-if="item === type" />
+    </div>
     <template #footer>
       尾部
     </template>

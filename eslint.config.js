@@ -1,1 +1,20 @@
-module.exports = require('@antfu/eslint-config').default()
+import antfu from '@antfu/eslint-config'
+
+export default await antfu(
+  { vue: true, typescript: true },
+  {
+    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+    files: ['**/*.vue'],
+    rules: {
+      'vue/operator-linebreak': ['error', 'before'],
+    },
+  },
+  {
+    // Without `files`, they are general rules for all files
+    rules: {
+      'curly': ['off'],
+      'no-console': ['off'],
+      'unused-imports/no-unused-vars': ['warn'],
+    },
+  },
+)
