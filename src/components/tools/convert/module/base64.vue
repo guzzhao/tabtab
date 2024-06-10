@@ -7,12 +7,14 @@ const type = ref(true)
 
 const text1 = ref('')
 
-watch([searchText, type], ([newV1, newV2]) => {
-  if (newV2) { text1.value = Base64.stringify(Utf8.parse(newV1)) }
+watchEffect(() => {
 
-  else {
+  if (type.value) {
+
+    text1.value = Base64.stringify(Utf8.parse(searchText))
+  } else {
     try {
-      text1.value = Utf8.stringify(Base64.parse(newV1))
+      text1.value = Utf8.stringify(Base64.parse(searchText))
     }
     catch (e) {
       text1.value = '错误'
@@ -41,6 +43,4 @@ watch([searchText, type], ([newV1, newV2]) => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

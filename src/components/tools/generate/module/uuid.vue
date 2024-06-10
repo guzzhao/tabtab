@@ -24,8 +24,9 @@ watchEffect(() => {
 
 <template>
   <n-card>
-    <n-slider v-model:value="count" :step="1" />{{ count }}
-    <n-switch v-model:value="isUppercase">
+    <n-slider v-model:value="count" :step="1" />
+    <n-space>
+      <n-switch v-model:value="isUppercase">
       <template #checked>
         大写
       </template>
@@ -41,8 +42,11 @@ watchEffect(() => {
         没短横线
       </template>
     </n-switch>
-    <div v-for="i in r">
-      {{ i }}
+    </n-space>
+    <div class="overflow-auto h-50 m-1">
+      <div v-for="i in r">
+        {{ i }}
+      </div>
     </div>
   </n-card>
 </template>

@@ -1,3 +1,6 @@
+import { SRARCH_URL } from '~/utils/const'
+
+
 export function isVar(str) {
   return /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(str)
 }
@@ -39,4 +42,11 @@ export function isBase64(str) {
 export function isDate(str) {
   if (/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.test(str))
     return true
+}
+
+
+export function openNewTab(type,query){
+  const baseUrl =  SRARCH_URL[type].url
+  chrome.tabs.create({ url: baseUrl.replace('{query}', query), active: true })
+
 }

@@ -18,8 +18,10 @@ watchEffect(() => {
   <n-card>
     <n-slider v-model:value="strLength" :step="1" />{{ strLength }}
     <n-slider v-model:value="count" :step="1" />{{ count }}
-    <div v-for="i in r">
-      {{ i }}
+    <div class="overflow-auto h-50">
+      <div v-for="i in r">
+        {{ i }}
+      </div>
     </div>
   </n-card>
 </template>

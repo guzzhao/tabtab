@@ -6,7 +6,7 @@ const isFull = defineModel()
 const time = ref()
 const { isFullscreen, enter, exit, toggle } = useFullscreen(time)
 
-const show = ref('time')
+// const show = ref('time')
 const formatted = useDateFormat(useNow(), 'HH:mm:ss')
 
 function toggleFullscreen() {

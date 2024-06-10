@@ -5,6 +5,9 @@ import { SRARCH_URL } from '~/utils/const'
 const searchText = defineModel()
 const type = ref('')
 
+let searchBtnDisable = computed(() =>  searchText.value=='' || searchText.value.trim()=='' )
+
+
 const props = defineProps(['foo'])
 
 const modules = import.meta.glob('./module/*.vue')
@@ -35,18 +38,22 @@ function searchOpen(t) {
 </script>
 
 <template>
-  <n-card style="width: 600px" title="模态框" :bordered="false" size="huge" role="dialog" aria-modal="true">
+  <n-card class="w-300 h-100" title="" :bordered="false" size="huge" role="dialog" aria-modal="true">
     <template #header-extra>
-      <n-input v-model:value="searchText" type="text" size="tiny" placeholder="Tiny Input" />
+
     </template>
+    <div class="w-50% p-2">
+
+      <n-input v-model:value="searchText" type="text" size="tiny" placeholder="Tiny Input" />
+    </div>
     <n-space>
-      <n-button @click="searchOpen('baidu')">
+      <n-button @click="searchOpen('baidu')" :disabled="searchBtnDisable">
         百度
       </n-button>
-      <n-button @click="searchOpen('bing')">
+      <n-button @click="searchOpen('bing')" :disabled="searchBtnDisable">
         Bing
       </n-button>
-      <n-button @click="searchOpen('google')">
+      <n-button @click="searchOpen('google')" :disabled="searchBtnDisable">
         谷歌
       </n-button>
       <n-button type="tertiary" @click="funChange('hash')">
@@ -69,7 +76,7 @@ function searchOpen(t) {
       <component :is="components[item]" v-if="item === type" />
     </div>
     <template #footer>
-      尾部
+
     </template>
   </n-card>
 </template>
