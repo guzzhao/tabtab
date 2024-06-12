@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const instance = axios.create({
+const request = axios.create({
   baseURL: 'https://api.example.com',
   timeout: 5000, // 设置超时时间
   headers: {
@@ -12,7 +12,7 @@ const instance = axios.create({
 });
 
 // 添加请求拦截器
-instance.interceptors.request.use(config => {
+request.interceptors.request.use(config => {
   // 在发送请求之前做些什么
   return config;
 }, error => {
@@ -21,7 +21,7 @@ instance.interceptors.request.use(config => {
 });
 
 // 添加响应拦截器
-instance.interceptors.response.use(response => {
+request.interceptors.response.use(response => {
   // 对响应数据做点什么
   return response.data;
 }, error => {
@@ -29,4 +29,26 @@ instance.interceptors.response.use(response => {
   return Promise.reject(error);
 });
 
-export default instance;
+export default request;
+
+export function get(url, param,config) {
+  return request({
+    ...{
+      method: 'get',
+      url: url,
+      params: param
+    },...config
+  })
+}
+
+
+export function post(url, param,config) {
+  return request({
+    ...{
+      method: 'post',
+      url: url,
+      data: param
+    },...config
+  })
+}
+

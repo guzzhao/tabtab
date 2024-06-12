@@ -1,4 +1,6 @@
 import type { App } from 'vue'
+import { createPinia } from 'pinia'
+import {myPlugin} from './piniaPlugin'
 
 export function setupApp(app: App) {
   // Inject a globally available `$app` object in template
@@ -8,6 +10,10 @@ export function setupApp(app: App) {
 
   // Provide access to `app` in script setup with `const app = inject('app')`
   app.provide('app', app.config.globalProperties.$app)
+
+  const pinia = createPinia()
+  pinia.use(myPlugin)
+  app.use(pinia)
 
   // Here you can install additional plugins for all contexts: popup, options page and content-script.
   // example: app.use(i18n)

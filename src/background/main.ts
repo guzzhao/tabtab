@@ -1,5 +1,6 @@
 import { onMessage, sendMessage } from 'webext-bridge/background'
 import type { Tabs } from 'webextension-polyfill'
+import {saveBookMarkToLocal} from '~/utils/util.js'
 
 // only on dev mode
 if (import.meta.hot) {
@@ -92,3 +93,14 @@ onMessage('get-current-tab', async () => {
 })
 
 
+browser.bookmarks.onCreated.addListener(function(id, bookmark) {
+  console.log('Bookmark created:', bookmark);
+});
+
+browser.bookmarks.onRemoved.addListener(function(id, removeInfo) {
+  console.log('Bookmark removed:', removeInfo);
+});
+
+browser.bookmarks.onChanged.addListener(function(id, changeInfo) {
+  saveBookMarkToLocal()
+});

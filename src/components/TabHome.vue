@@ -12,8 +12,8 @@ const img = ref('url(https://w.wallhaven.cc/full/jx/wallhaven-jxl31y.png)')
       <Time />
       <Search />
       <Expand />
-      <Generate />
       <Bookmark/>
+      <Generate />
     </div>
   </div>
 </template>

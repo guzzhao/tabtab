@@ -50,3 +50,19 @@ export function openNewTab(type,query){
   chrome.tabs.create({ url: baseUrl.replace('{query}', query), active: true })
 
 }
+
+export function saveBookMarkToLocal(){
+  browser.bookmarks.getTree().then(tree=>{
+    browser.storage.local.set({'bookmark_tree':tree}).then(function() {
+      console.log('Data saved');
+    });
+  });
+}
+
+export function getBookMarkToLocal(){
+  console.log("getBookMarkToLocal",chrome.storage)
+
+  chrome.storage.local.get('bookmark_tree').then(function(result) {
+    console.log('Data retrieved:', result);
+  });
+}
