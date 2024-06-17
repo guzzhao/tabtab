@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import { createPinia } from 'pinia'
-import {myPlugin} from './piniaPlugin'
+import { myPlugin } from './piniaPlugin'
 
 export function setupApp(app: App) {
   // Inject a globally available `$app` object in template

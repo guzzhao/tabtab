@@ -21,7 +21,7 @@ watchEffect(() => {
 
   if (searchText.value) {
     instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText.value}`).then(res => {
-      suggestionList.value = res.g.map(e => e.q)
+      suggestionList.value = res?.g?.map(e => e.q)
         .slice(0, 10 - [abase64.value, adate.value, avar.value].filter(Boolean).length)
     })
   }

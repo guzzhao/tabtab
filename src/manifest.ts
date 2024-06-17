@@ -23,12 +23,12 @@ export async function getManifest() {
     // },
     background: isFirefox
       ? {
-          scripts: ['dist/background/index.mjs'],
-          type: 'module',
-        }
+        scripts: ['dist/background/index.mjs'],
+        type: 'module',
+      }
       : {
-          service_worker: './dist/background/index.mjs',
-        },
+        service_worker: './dist/background/index.mjs',
+      },
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',
@@ -38,10 +38,12 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
-      'bookmarks'
+      'bookmarks',
+      'favicon'
     ],
+
     // host_permissions: ['*://*/*'],
-    optional_permissions: ['bookmarks'],
+    // optional_permissions: ['bookmarks'],
     chrome_url_overrides: {
       newtab: './dist/newtab/index.html',
     },
@@ -57,8 +59,9 @@ export async function getManifest() {
     ],
     web_accessible_resources: [
       {
-        resources: ['dist/contentScripts/style.css'],
+        resources: ['dist/contentScripts/style.css', "_favicon/*"],
         matches: ['<all_urls>'],
+        "extension_ids": ["*"]
       },
     ],
     content_security_policy: {

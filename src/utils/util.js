@@ -45,24 +45,29 @@ export function isDate(str) {
 }
 
 
-export function openNewTab(type,query){
-  const baseUrl =  SRARCH_URL[type].url
-  chrome.tabs.create({ url: baseUrl.replace('{query}', query), active: true })
+export function openNewTab(type, query) {
+  if (type) {
+
+    const baseUrl = SRARCH_URL[type].url
+    chrome.tabs.create({ url: baseUrl.replace('{query}', query), active: true })
+  } else {
+    chrome.tabs.create({ url: query, active: true })
+
+  }
+
 
 }
 
-export function saveBookMarkToLocal(){
-  browser.bookmarks.getTree().then(tree=>{
-    browser.storage.local.set({'bookmark_tree':tree}).then(function() {
+export function saveBookMarkToLocal() {
+  browser.bookmarks.getTree().then(tree => {
+    browser.storage.local.set({ 'bookmark_tree': tree }).then(function () {
       console.log('Data saved');
     });
   });
 }
 
-export function getBookMarkToLocal(){
-  console.log("getBookMarkToLocal",chrome.storage)
+export async function getBookMarkToLocal() {
+  console.log("getBookMarkToLocal", chrome.storage)
 
-  chrome.storage.local.get('bookmark_tree').then(function(result) {
-    console.log('Data retrieved:', result);
-  });
+  return chrome.storage.local.get('bookmark_tree')
 }
