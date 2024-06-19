@@ -10,6 +10,13 @@ const searchText = ref('')
 const searchType = ref('bing')
 provide('searchText', searchText)
 
+const searchOptions = SRARCH_LIST.map(e =>{
+  return {
+    label:e,
+    value:e
+  }
+})
+
 
 function handleKeyDown(event) {
 
@@ -29,13 +36,16 @@ function handleKeyDown(event) {
     <n-input v-model:value="searchText" passively-activated round placeholder="搜索" size="large" @keydown="handleKeyDown"
       autofocus id="mySearch">
       <template #prefix>
-        <span v-if="searchType === 'baidu'" class="i-ri-baidu-fill" />
-        <span v-if="searchType === 'bing'" class="i-mdi-microsoft-bing" />
-        <span v-if="searchType === 'google'" class="i-ri-google-fill" />
-      </template> 
+
+        <n-popselect v-model:value="searchType" :options="searchOptions" trigger="click">
+          <span v-if="searchType === 'baidu'" class="i-ri-baidu-fill" />
+          <span v-if="searchType === 'bing'" class="i-mdi-microsoft-bing" />
+          <span v-if="searchType === 'google'" class="i-ri-google-fill" />
+        </n-popselect>
+      </template>
     </n-input>
 
-    <Suggestion :search-text  v-if="searchText!=''"/>
+    <Suggestion :search-text v-if="searchText != ''" />
 
     <n-modal v-model:show="showModal">
       <Convert v-model.trim="searchText" />

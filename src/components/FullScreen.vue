@@ -1,10 +1,14 @@
 <script setup>
 import { useDateFormat, useFullscreen, useNow } from '@vueuse/core'
 
-const isFull = defineModel()
-
+const isFull = ref(false)
 const time = ref()
 const { isFullscreen, enter, exit, toggle } = useFullscreen(time)
+
+function clickFull() {
+  isFull.value = !isFull.value
+}
+
 
 // const show = ref('time')
 const formatted = useDateFormat(useNow(), 'HH:mm:ss')
@@ -23,10 +27,11 @@ watch(isFull, (newValue) => {
 
 <template>
   <div>
-    <div
-      ref="time" class=" flex items-center justify-center h-full bg-white text-10 " :class="{ full: isFullscreen }"
-      @click="toggleFullscreen"
-    >
+    
+
+    <MaterialSymbolsFullscreen @click="clickFull" />
+
+    <div ref="time" class=" text-center  bg-white" :class="{ full: isFullscreen }" @click="toggleFullscreen">
       <p>
         {{ formatted }}
       </p>

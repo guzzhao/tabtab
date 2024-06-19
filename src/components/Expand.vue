@@ -5,14 +5,9 @@ import MaterialSymbolsFullscreen from '~icons/material-symbols/fullscreen'
 import generate from "./tools/generate/index.vue"
 // import { fullscreen } from '~/logic'
 
-const isFull = ref(false)
-const showModal= ref(false)
+const showModal = ref(false)
 
-function clickFull() {
-  isFull.value = !isFull.value
-}
-
-function generateFun(){
+function generateFun() {
   showModal.value = true
 
 }
@@ -21,28 +16,25 @@ function generateFun(){
 </script>
 
 <template>
-  <div class="expand flex-row items-end ">
+  <div class="expand flex-row items-end   ">
     <div class="flex">
       <div>
         <MaterialSymbolsSettings class="" />
-      </div>   
+      </div>
       <div>
         <MaterialSymbolsSettings @click="generateFun" />
       </div>
-      <div>
-        <MaterialSymbolsFullscreen @click="clickFull" />
-      </div>
     </div>
 
-    <FullScreen v-model="isFull" />
-    <generate v-model="showModal"/>
+    <FullScreen />
+    <generate v-model="showModal" />
   </div>
 </template>
 
 <style scoped>
-.expand{
+.expand {
   position: fixed;
   right: 10px;
-  top:10px
+  top: 10px
 }
 </style>

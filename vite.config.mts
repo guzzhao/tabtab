@@ -39,14 +39,14 @@ export const sharedConfig: UserConfig = {
           'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
         },
       ],
-      dts: r('src/auto-imports.d.ts'),
+      dts: r('src/types/auto-imports.d.ts'),
     }),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
       dirs: [r('src/components')],
       // generate `components.d.ts` for ts support with Volar
-      dts: r('src/components.d.ts'),
+      dts: r('src/types/components.d.ts'),
       resolvers: [
         NaiveUiResolver(),
         // auto import icons
@@ -107,9 +107,9 @@ export default defineConfig(({ command }) => ({
     },
     rollupOptions: {
       input: {
-        newtab: r('src/newtab/index.html'),
-        options: r('src/options/index.html'),
-        popup: r('src/popup/index.html'),
+        newtab: r('src/function/newtab/index.html'),
+        options: r('src/function/options/index.html'),
+        popup: r('src/function/popup/index.html'),
       },
     },
   },
