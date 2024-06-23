@@ -29,7 +29,7 @@ export const sharedConfig: UserConfig = {
 
     AutoImport({
       imports: [
-        'vue',
+        'vue','pinia',
         {
           'webextension-polyfill': [
             ['*', 'browser'],

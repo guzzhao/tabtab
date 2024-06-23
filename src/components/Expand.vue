@@ -3,9 +3,15 @@ import FullScreen from './FullScreen.vue'
 import MaterialSymbolsSettings from '~icons/material-symbols/settings'
 import MaterialSymbolsFullscreen from '~icons/material-symbols/fullscreen'
 import generate from "./tools/generate/index.vue"
+
+import { useCounterStore } from "~/stores/counter"
+
 // import { fullscreen } from '~/logic'
 
 const showModal = ref(false)
+
+
+const count = useCounterStore()
 
 function generateFun() {
   showModal.value = true
@@ -16,7 +22,7 @@ function generateFun() {
 </script>
 
 <template>
-  <div class="expand flex-row items-end   ">
+  <div class="expand flex-row items-end">
     <div class="flex">
       <div>
         <MaterialSymbolsSettings class="" />

@@ -58,7 +58,7 @@ function back() {
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="bg-white mt-10">
 
 
     <div class="flex">

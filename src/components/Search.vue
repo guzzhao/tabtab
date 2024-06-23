@@ -45,7 +45,7 @@ function handleKeyDown(event) {
       </template>
     </n-input>
 
-    <Suggestion :search-text v-if="searchText != ''" />
+    <Suggestion :search-text v-if="searchText != ''"  class="absolute z-100 w-500px"/>
 
     <n-modal v-model:show="showModal">
       <Convert v-model.trim="searchText" />
