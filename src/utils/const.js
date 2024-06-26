@@ -17,3 +17,6 @@ export const SRARCH_URL = {
 }
 
 export const SRARCH_LIST = Object.keys(SRARCH_URL)
+
+
+export const base64 = 'base64'

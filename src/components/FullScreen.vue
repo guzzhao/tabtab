@@ -9,8 +9,6 @@ function clickFull() {
   isFull.value = !isFull.value
 }
 
-
-// const show = ref('time')
 const formatted = useDateFormat(useNow(), 'HH:mm:ss')
 
 function toggleFullscreen() {
@@ -27,8 +25,6 @@ watch(isFull, (newValue) => {
 
 <template>
   <div>
-    
-
     <MaterialSymbolsFullscreen @click="clickFull" />
 
     <div ref="time" class=" text-center  bg-white" :class="{ full: isFullscreen }" @click="toggleFullscreen">

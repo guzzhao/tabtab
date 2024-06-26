@@ -3,15 +3,15 @@ import { useClipboard } from '@vueuse/core'
 import Base from '../Base.vue'
 import { isBase64 } from '~/utils/util'
 
-const searchText = inject('searchText')
+const inputText = inject('inputText')
+const updateSearchSuggsetion = inject('updateSearchSuggsetion')
 const msg = useMessage()
 
-const { searchSuggestion, updateSearchSuggsetion } = inject('searchSuggestion')
 
 const unBase64 = computed(() => {
-  if (isBase64(searchText)) {
+  if (isBase64(inputText)) {
     updateSearchSuggsetion('Base64', true)
-    return atob(searchText)
+    return atob(inputText)
   }
   else {
     updateSearchSuggsetion('Base64', false)

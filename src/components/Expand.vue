@@ -6,7 +6,6 @@ import generate from "./tools/generate/index.vue"
 
 import { useCounterStore } from "~/stores/counter"
 
-// import { fullscreen } from '~/logic'
 
 const showModal = ref(false)
 

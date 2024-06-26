@@ -5,10 +5,7 @@ import { isVar } from '~/utils/util'
 import { variateArrayTo_AA_BB, variateArrayTo_AbBb, variateArrayTo_aa0bb, variateArrayTo_aa_bb, variateArrayTo_abBb } from '~/utils/strUtil'
 
 const searchText = inject('searchText')
-
-
-const { searchSuggestion, updateSearchSuggsetion } = inject('searchSuggestion')
-
+const updateSearchSuggsetion = inject('updateSearchSuggsetion')
 const msg = useMessage()
 
 const varText = computed(() => {

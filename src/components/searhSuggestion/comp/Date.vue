@@ -5,7 +5,7 @@ import { isDate, isTimestamp } from '~/utils/util'
 
 const searchText = inject('searchText')
 
-const { searchSuggestion, updateSearchSuggsetion } = inject('searchSuggestion')
+const updateSearchSuggsetion = inject('updateSearchSuggsetion')
 
 const msg = useMessage()
 
@@ -42,7 +42,6 @@ const t2 = computed(() => {
 const { text, copy, copied, isSupported } = useClipboard()
 
 function copyText(text) {
-  console.log('copy')
   copy(text.value)
 
   nextTick()
@@ -66,13 +65,6 @@ function copyText(text) {
       <n-tag type="warning" @click="copyText(t2)">
         {{ t2 }}
       </n-tag>
-    <!-- <n-tag type="error">
-      手写的从前
-    </n-tag>
-    <n-tag type="info">
-      哪里都是你
-    </n-tag>
-      -->
     </div>
   </Base>
 </template>

@@ -22,7 +22,8 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "outDir": "extension"
   },
   "exclude": ["dist", "node_modules"]
 }

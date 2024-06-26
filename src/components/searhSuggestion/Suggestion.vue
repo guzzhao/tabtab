@@ -2,9 +2,11 @@
 import Base64 from './comp/Base64.vue'
 import Date from './comp/Date.vue'
 import Var from './comp/Var.vue'
-import { isBase64, isDate, isTimestamp, isVar } from '~/utils/util'
 import instance from "~/api/request.js"
+import { useAppStore } from '~/stores/app';
+import { openNewTab } from '~/utils/util.js'
 
+const app = useAppStore()
 const searchText = inject('searchText')
 const suggestionList = ref([])
 const searchSuggestion = ref({})
@@ -16,8 +18,8 @@ let avar = ref(false)
 watchEffect(() => {
 
   abase64.value = searchSuggestion.value && searchSuggestion.value.Base64
-  adate.value = searchSuggestion && searchSuggestion.value.Date
-  avar.value = searchSuggestion && searchSuggestion.value.Var
+  adate.value = searchSuggestion.value && searchSuggestion.value.Date
+  avar.value = searchSuggestion.value && searchSuggestion.value.Var
 
   if (searchText.value) {
     instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText.value}`).then(res => {
@@ -32,8 +34,11 @@ function updateSearchSuggsetion(k, v) {
   searchSuggestion.value[k] = v
 }
 
+function openSearh(i){
+  openNewTab(app.searchEngine, i)
+}
 
-provide('searchSuggestion', { searchSuggestion, updateSearchSuggsetion })
+provide('updateSearchSuggsetion', updateSearchSuggsetion)
 </script>
 
 <template>
@@ -42,20 +47,9 @@ provide('searchSuggestion', { searchSuggestion, updateSearchSuggsetion })
       <Base64 v-show="abase64" />
       <Date v-show="adate" />
       <Var v-show="avar" />
-      <!-- <n-space>
-        <div>
-          <span class="i-ri-baidu-fill">Baidu</span>
-        </div>
-        <div>
-          <span class="i-mdi-microsoft-bing">Bing</span>
-        </div>
-        <div>
-          <span class="i-ri-google-fill">Google</span>
-        </div>
-      </n-space> -->
 
-      <div class="bg-white" v-if="searchText != ''">
-        <div v-for="i in suggestionList" class="m-2">
+      <div class="bg-white cursor-pointer " v-if="searchText != ''">
+        <div v-for="i in suggestionList" class="m-2 hover:border-gray-400" @click="openSearh(i)">
           {{ i }}
         </div>
       </div>

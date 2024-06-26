@@ -1,6 +1,7 @@
 export function myPlugin({ store, options }) {
 
 
+  console.log("my myPlugin")
   if (!options.persist) {
     return
   }

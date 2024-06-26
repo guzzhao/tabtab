@@ -20,24 +20,9 @@ browser.runtime.onInstalled.addListener((): void => {
 
 
 browser.tabs.onUpdated.addListener(tab => {
-  // eslint-disable-next-line no-console
-  console.log(tab, 'tab')
 })
 
 
-browser.tabs.onCreated.addListener(function (tab) {
-  // 当用户创建新标签页时，显示一个通知
-  console.log(tab)
-  if (tab.pendingUrl == "edge://newtab/") {
-
-    browser.bookmarks.getTree().then(e => {
-      console.log(e, "asd")
-    })
-
-  }
-
-
-});
 
 
 
@@ -79,7 +64,6 @@ onMessage('get-current-tab', async () => {
 
   try {
     const tab = await browser.tabs.get(previousTabId)
-    console.log(tab, "123")
 
     return {
       title: tab?.title,

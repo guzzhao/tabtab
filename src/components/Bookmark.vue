@@ -9,14 +9,7 @@ let src = ref('')
 
 
 onMounted(() => {
-  getBookMarkToLocal1()
-  // TODO
-  // function faviconURL(u) {
-  // const url = new URL(chrome.runtime.getURL("/_favicon/"));
-  // url.searchParams.set("pageUrl", u);
-  // url.searchParams.set("size", "32");
-  // return url.toString();
-  //  src = faviconURL("https://ctool.dev/tool.html") 
+  getBookMarkToLocal()
 
 })
 
@@ -24,7 +17,7 @@ let backBtn = computed(() => {
   return level.value.length !== 0
 })
 
-function getBookMarkToLocal1() {
+function getBookMarkToLocal() {
   chrome.bookmarks.getTree().then(e => {
     baseBookMarks = e[0].children[0].children
     bookMarks.value = e[0].children[0].children

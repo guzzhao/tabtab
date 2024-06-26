@@ -2,12 +2,13 @@
 import MaterialSymbolsSearch from '~icons/material-symbols/search'
 import { SRARCH_LIST } from '~/utils/const'
 import { openNewTab } from '~/utils/util.js'
-import { search_config } from '~/logic/storage'
+import { useAppStore } from '~/stores/app';
 
+
+const app = useAppStore()
 
 const showModal = ref(false)
 const searchText = ref('')
-const searchType = ref('bing')
 provide('searchText', searchText)
 
 const searchOptions = SRARCH_LIST.map(e =>{
@@ -17,7 +18,6 @@ const searchOptions = SRARCH_LIST.map(e =>{
   }
 })
 
-
 function handleKeyDown(event) {
 
   if (event.code === 'Tab') {
@@ -26,7 +26,7 @@ function handleKeyDown(event) {
   }
 
   if (event.code === 'Enter') {
-    openNewTab(search_config.value.search_engine, searchText.value)
+    openNewTab(app.searchEngine, searchText.value)
   }
 }
 </script>
@@ -37,10 +37,10 @@ function handleKeyDown(event) {
       autofocus id="mySearch">
       <template #prefix>
 
-        <n-popselect v-model:value="searchType" :options="searchOptions" trigger="click">
-          <span v-if="searchType === 'baidu'" class="i-ri-baidu-fill" />
-          <span v-if="searchType === 'bing'" class="i-mdi-microsoft-bing" />
-          <span v-if="searchType === 'google'" class="i-ri-google-fill" />
+        <n-popselect v-model:value="app.searchEngine" :options="searchOptions" trigger="click">
+          <span v-if="app.searchEngine === 'baidu'" class="i-ri-baidu-fill cursor-pointer" />
+          <span v-if="app.searchEngine === 'bing'" class="i-mdi-microsoft-bing cursor-pointer" />
+          <span v-if="app.searchEngine === 'google'" class="i-ri-google-fill cursor-pointer"  />
         </n-popselect>
       </template>
     </n-input>
