@@ -6,6 +6,8 @@ import instance from "~/api/request.js"
 import { useAppStore } from '~/stores/app';
 import { openNewTab } from '~/utils/util.js'
 
+const props = defineProps(['isTools'])
+
 const app = useAppStore()
 const searchText = inject('searchText')
 const suggestionList = ref([])
@@ -21,6 +23,8 @@ watchEffect(() => {
   adate.value = searchSuggestion.value && searchSuggestion.value.Date
   avar.value = searchSuggestion.value && searchSuggestion.value.Var
 
+  nextTick()
+
   if (searchText.value) {
     instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText.value}`).then(res => {
       suggestionList.value = res?.g?.map(e => e.q)
@@ -31,10 +35,11 @@ watchEffect(() => {
 })
 
 function updateSearchSuggsetion(k, v) {
+  console.log(k, v)
   searchSuggestion.value[k] = v
 }
 
-function openSearh(i){
+function openSearh(i) {
   openNewTab(app.searchEngine, i)
 }
 
@@ -47,11 +52,10 @@ provide('updateSearchSuggsetion', updateSearchSuggsetion)
       <Base64 v-show="abase64" />
       <Date v-show="adate" />
       <Var v-show="avar" />
-
       <div class="bg-white cursor-pointer " v-if="searchText != ''">
-        <div v-for="i in suggestionList" class="m-2 hover:border-gray-400" @click="openSearh(i)">
-          {{ i }}
-        </div>
+        <Base v-for="i in suggestionList" class="m-2 hover:border-gray-400" @click="openSearh(i)">
+        {{ i }}
+        </Base>
       </div>
     </div>
   </div>

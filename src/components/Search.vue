@@ -9,6 +9,14 @@ const app = useAppStore()
 
 const showModal = ref(false)
 const searchText = ref('')
+
+
+const searchTextTrim = computed(()=>{
+  return searchText.value.trim()
+})
+
+
+
 provide('searchText', searchText)
 
 const searchOptions = SRARCH_LIST.map(e =>{
@@ -45,7 +53,7 @@ function handleKeyDown(event) {
       </template>
     </n-input>
 
-    <Suggestion :search-text v-if="searchText != ''"  class="absolute z-100 w-500px"/>
+    <Suggestion  :isTools="searchText.length !== searchTextTrim.length"  v-if="searchTextTrim != ''"   class="absolute z-100 w-500px"/>
 
     <n-modal v-model:show="showModal">
       <Convert v-model.trim="searchText" />

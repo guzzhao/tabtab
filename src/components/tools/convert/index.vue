@@ -8,7 +8,6 @@ const type = ref('')
 let searchBtnDisable = computed(() =>  searchText.value=='' || searchText.value.trim()=='' )
 
 
-const props = defineProps(['foo'])
 
 const modules = import.meta.glob('./module/*.vue')
 
@@ -21,15 +20,9 @@ Object.entries(modules).forEach(([path, asyncCom]) => {
   components.value[name] = markRaw(defineAsyncComponent(asyncCom))
 })
 
-
-
 function funChange(t1) {
   type.value = t1
 }
-
-
-
-
 
 function searchOpen(t) {
   const baseUrl = SRARCH_URL[t].url
