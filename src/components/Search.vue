@@ -66,5 +66,4 @@ function handleKeyDown(event) {
   width: 500px;
 }
 
-.recommend {}
 </style>

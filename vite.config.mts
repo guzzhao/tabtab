@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 
 import { dirname, relative } from 'node:path'
 import type { UserConfig } from 'vite'
@@ -8,10 +7,11 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import UnoCSS from 'unocss/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import { isDev, port, r } from './scripts/utils'
 import packageJson from './package.json'
+
+
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
@@ -59,8 +59,6 @@ export const sharedConfig: UserConfig = {
     // https://github.com/antfu/unplugin-icons
     Icons(),
 
-    // https://github.com/unocss/unocss
-    UnoCSS(),
 
     // rewrite assets to use relative path
     {
@@ -77,10 +75,7 @@ export const sharedConfig: UserConfig = {
       'vue',
       '@vueuse/core',
       'webextension-polyfill',
-    ],
-    exclude: [
-      'vue-demi',
-    ],
+    ]
   },
 }
 
@@ -112,9 +107,5 @@ export default defineConfig(({ command }) => ({
         popup: r('src/function/popup/index.html'),
       },
     },
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-  },
+  }
 }))
