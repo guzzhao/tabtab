@@ -15,8 +15,7 @@
     "resolveJsonModule": true,
     "types": [
       "vite/client",
-      "unplugin-icons/types/vue",
-      "naive-ui/volar"
+      "unplugin-icons/types/vue"
     ],
     "strict": true,
     "noUnusedLocals": true,

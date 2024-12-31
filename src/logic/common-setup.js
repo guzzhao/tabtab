@@ -1,8 +1,8 @@
-import type { App } from 'vue'
+
 import { createPinia } from 'pinia'
 import { myPlugin } from './piniaPlugin'
 
-export function setupApp(app: App) {
+export function setupApp(app) {
   // Inject a globally available `$app` object in template
   app.config.globalProperties.$app = {
     context: '',

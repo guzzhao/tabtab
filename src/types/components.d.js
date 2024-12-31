@@ -16,7 +16,6 @@ declare module 'vue' {
     Generate: typeof import('./../components/tools/generate/index.vue')['default']
     Hash: typeof import('./../components/tools/convert/module/hash.vue')['default']
     Logo: typeof import('./../components/Logo.vue')['default']
-    MaterialSymbolsFullscreen: typeof import('~icons/material-symbols/fullscreen')['default']
     Math: typeof import('./../components/tools/convert/module/math.vue')['default']
     Search: typeof import('./../components/Search.vue')['default']
     SharedSubtitle: typeof import('./../components/SharedSubtitle.vue')['default']

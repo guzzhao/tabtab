@@ -1,19 +1,18 @@
 
 import { dirname, relative } from 'node:path'
-import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import { isDev, port, r } from './scripts/utils'
 import packageJson from './package.json'
+import tailwindcss from '@tailwindcss/vite'
 
 
 
-export const sharedConfig: UserConfig = {
+export const sharedConfig = {
   root: r('src'),
   resolve: {
     alias: {
@@ -48,7 +47,6 @@ export const sharedConfig: UserConfig = {
       // generate `components.d.ts` for ts support with Volar
       dts: r('src/types/components.d.ts'),
       resolvers: [
-        NaiveUiResolver(),
         // auto import icons
         IconsResolver({
           prefix: '',
@@ -58,8 +56,7 @@ export const sharedConfig: UserConfig = {
 
     // https://github.com/antfu/unplugin-icons
     Icons(),
-
-
+    tailwindcss(),
     // rewrite assets to use relative path
     {
       name: 'assets-rewrite',
@@ -102,9 +99,9 @@ export default defineConfig(({ command }) => ({
     },
     rollupOptions: {
       input: {
-        newtab: r('src/function/newtab/index.html'),
-        options: r('src/function/options/index.html'),
-        popup: r('src/function/popup/index.html'),
+        newtab: r('src/module/newtab/index.html'),
+        options: r('src/module/options/index.html'),
+        popup: r('src/module/popup/index.html'),
       },
     },
   }

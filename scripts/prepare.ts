@@ -16,10 +16,10 @@ async function stubIndexHtml() {
 
   for (const view of views) {
     await fs.ensureDir(r(`extension/dist/${view}`))
-    let data = await fs.readFile(r(`src/function/${view}/index.html`), 'utf-8')
+    let data = await fs.readFile(r(`src/module/${view}/index.html`), 'utf-8')
     data = data
-      .replace('"./main.ts"', `"http://localhost:${port}/function/${view}/main.ts"`)
-      .replace('<div id="app"></div>', '<div id="app">Vite server did not start</div>')
+      .replace('"./main.js"', `"http://localhost:${port}/module/${view}/main.js"`)
+      .replace('<div id="app"></div>', '<div id="app">Vite server did not start ..</div>')
     await fs.writeFile(r(`extension/dist/${view}/index.html`), data, 'utf-8')
     log('PRE', `stub ${view}`)
   }
