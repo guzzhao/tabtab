@@ -26,7 +26,7 @@ async function stubIndexHtml() {
 }
 
 function writeManifest() {
-  execSync('npx esno ./scripts/manifest.ts', { stdio: 'inherit' })
+  execSync('npx esno ./scripts/manifest.js', { stdio: 'inherit' })
 }
 
 writeManifest()
@@ -37,7 +37,7 @@ if (isDev) {
     .on('change', () => {
       stubIndexHtml()
     })
-  chokidar.watch([r('src/manifest.ts'), r('package.json')])
+  chokidar.watch([r('src/manifest.js'), r('package.json')])
     .on('change', () => {
       writeManifest()
     })
