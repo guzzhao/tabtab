@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 
-import { isDev, isFirefox, port, r } from '../scripts/utils'
+import { isDev, isFirefox, port, r } from './utils.js'
 
 export async function getManifest() {
   const pkg = await fs.readJSON(r('package.json'))

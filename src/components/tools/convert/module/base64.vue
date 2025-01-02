@@ -30,15 +30,13 @@ watchEffect(() => {
 
 <template>
   <div>
-    <n-switch v-model:value="type">
-      <template #checked>
-        编码
-      </template>
-      <template #unchecked>
-        解码
-      </template>
-    </n-switch>
+    <input type="checkbox" checked="checked" class="toggle toggle-primary" v-model="type" />
+    <div>
+      <span v-if="type">编码</span>
+      <span v-else>解码</span>
+    </div>
 
+    
     {{ text1 }}
   </div>
 </template>

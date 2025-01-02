@@ -16,8 +16,9 @@ watchEffect(() => {
 
 <template>
   <n-card>
-    <n-slider v-model:value="strLength" :step="1" />{{ strLength }}
-    <n-slider v-model:value="count" :step="1" />{{ count }}
+    <input type="range" min="0" max="100" class="range range-primary" v-model="strLength" /> {{ strLength }}
+    <input type="range" min="0" max="100" class="range range-primary" v-model="count" /> {{ count }}
+
     <div class="overflow-auto h-50">
       <div v-for="i in r">
         {{ i }}

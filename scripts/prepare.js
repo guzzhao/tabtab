@@ -2,7 +2,8 @@
 import { execSync } from 'node:child_process'
 import fs from 'fs-extra'
 import chokidar from 'chokidar'
-import { isDev, log, port, r } from './utils'
+import { isDev, log, port, r } from './utils.js'
+import { getManifest } from './manifest.js'
 
 /**
  * Stub index.html to use Vite in development
@@ -25,11 +26,14 @@ async function stubIndexHtml() {
   }
 }
 
-function writeManifest() {
-  execSync('npx esno ./scripts/manifest.js', { stdio: 'inherit' })
+
+async function writeManifest() {
+  await fs.writeJSON(r('extension/manifest.json'), await getManifest(), { spaces: 2 })
+  log('PRE', 'write manifest.json')
 }
 
 writeManifest()
+
 
 if (isDev) {
   stubIndexHtml()

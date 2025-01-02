@@ -8,7 +8,6 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { isDev, port, r } from './scripts/utils'
-import packageJson from './package.json'
 
 
 
@@ -18,10 +17,6 @@ export const sharedConfig = {
     alias: {
       '~/': `${r('src')}/`,
     },
-  },
-  define: {
-    __DEV__: isDev,
-    __NAME__: JSON.stringify(packageJson.name),
   },
   plugins: [
     Vue(),

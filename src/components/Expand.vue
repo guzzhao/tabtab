@@ -32,7 +32,6 @@ function generateFun() {
     </div>
 
     <FullScreen />
-    <generate v-model="showModal" />
   </div>
 </template>
 

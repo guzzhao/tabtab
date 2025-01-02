@@ -12,23 +12,21 @@ const t5 = computed(() => variateArrayTo_aa0bb(searchText.value))
 
 <template>
   <div>
-    <n-space>
-      <n-tag @click="copyText(t1)">
+      <div class="badge badge-primary" @click="copyText(t1)">
         {{ t1 }}
-      </n-tag>
-      <n-tag type="success" @click="copyText(t2)">
+      </div>
+      <div class="badge badge-primary" @click="copyText(t2)">
         {{ t2 }}
-      </n-tag>
-      <n-tag type="warning" @click="copyText(t3)">
+      </div>
+      <div class="badge badge-primary" @click="copyText(t3)">
         {{ t3 }}
-      </n-tag>
-      <n-tag type="error" @click="copyText(t4)">
+      </div>
+      <div class="badge badge-primary" @click="copyText(t4)">
         {{ t4 }}
-      </n-tag>
-      <n-tag type="info" @click="copyText(t5)">
+      </div>
+      <div class="badge badge-primary" @click="copyText(t5)">
         {{ t5 }}
-      </n-tag>
-    </n-space>
+      </div>
   </div>
 </template>
 

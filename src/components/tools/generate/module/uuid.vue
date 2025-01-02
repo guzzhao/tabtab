@@ -24,25 +24,15 @@ watchEffect(() => {
 
 <template>
   <n-card>
-    <n-slider v-model:value="count" :step="1" />
-    <n-space>
-      <n-switch v-model:value="isUppercase">
-      <template #checked>
-        大写
-      </template>
-      <template #unchecked>
-        小写
-      </template>
-    </n-switch>
-    <n-switch v-model:value="hasLine">
-      <template #checked>
-        短横线
-      </template>
-      <template #unchecked>
-        没短横线
-      </template>
-    </n-switch>
-    </n-space>
+    <input type="range" min="0" max="100" class="range range-primary" v-model="count" /> {{ count }}
+    <input type="checkbox" :checked="isUppercase" class="toggle"  />
+    <div v-if="isUppercase" >大写</div>
+    <div v-else>小写</div>
+    <input type="checkbox" :checked="hasLine" class="toggle"  />
+    <div v-if="hasLine">短横线</div>
+    <div v-else>没短横线</div>
+
+
     <div class="overflow-auto h-50 m-1">
       <div v-for="i in r">
         {{ i }}

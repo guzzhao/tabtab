@@ -1,6 +1,6 @@
 <script setup>
 import { onMessage, sendMessage } from 'webext-bridge/background'
-import {openNewTab} from '~/utils/util'
+import { openNewTab } from '~/utils/util'
 
 let baseBookMarks = []
 let bookMarks = ref([])
@@ -29,8 +29,8 @@ function clickTag(id, url) {
     console.log(id)
     level.value.push(id)
     buildBookMark()
-  }else{
-    openNewTab("",url)
+  } else {
+    openNewTab("", url)
   }
 }
 
@@ -51,19 +51,17 @@ function back() {
 </script>
 
 <template>
-  <div class="bg-white mt-10">
-
-
+  <div class="mt-10">
     <div class="flex">
-      <n-tag v-if="backBtn" @click="back"> 返回 </n-tag>
+      <div class="badge badge-info cursor-pointer" v-if="backBtn" @click="back"> 返回 </div>
       <div v-for="bo in bookMarks">
-        <n-space>
-          <n-tag  v-if="bo.url" type="warning" @click="clickTag(bo.id, bo.url)"> {{ bo.title }} </n-tag>
-          <n-tag  v-else type="success" @click="clickTag(bo.id, bo.url)"> {{ bo.title }} </n-tag>
-        </n-space>
+        <div class="badge badge-warning cursor-pointer" v-if="bo.url" @click="clickTag(bo.id, bo.url)"> {{ bo.title }}
+        </div>
+        <div class="badge badge-primary cursor-pointer" v-else @click="clickTag(bo.id, bo.url)"> {{ bo.title }} </div>
+
       </div>
 
-      <img :src/>
+      <img :src />
     </div>
 
 

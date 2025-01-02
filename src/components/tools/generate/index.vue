@@ -24,27 +24,22 @@ function funChange(t1) {
 </script>
 
 <template>
-  <n-modal v-model:show="showModal" class="w-300 h-100">
-    <n-card>
-      <n-space class="pb-3">
-        <n-button type="tertiary" @click="funChange('uniqueId')">
+  
+        <button type="tertiary" @click="funChange('uniqueId')">
           随机字符
-        </n-button>
-        <n-button type="primary" @click="funChange('uuid')">
+        </button>
+        <button type="primary" @click="funChange('uuid')">
           UUID生成
-        </n-button>
-        <n-button type="warning" @click="funChange('color')">
+        </button>
+        <button type="warning" @click="funChange('color')">
           颜色
-        </n-button>
-      </n-space>
+        </button>
       <div>
         <div v-for="(item, index) in comName" :key="index" >
         <component :is="components[item]" v-if="item === funcType" />
       </div>
       </div>
     
-    </n-card>
-  </n-modal>
 </template>
 
 <style scoped>

@@ -5,9 +5,7 @@ import { SRARCH_URL } from '~/utils/const'
 const searchText = defineModel()
 const type = ref('')
 
-let searchBtnDisable = computed(() =>  searchText.value=='' || searchText.value.trim()=='' )
-
-
+let searchBtnDisable = computed(() =>  searchText.value=='' &&  searchText.value.trim()=='' )
 
 const modules = import.meta.glob('./module/*.vue')
 
@@ -31,47 +29,43 @@ function searchOpen(t) {
 </script>
 
 <template>
-  <n-card class="w-300 h-100" title="" :bordered="false" size="huge" role="dialog" aria-modal="true">
-    <template #header-extra>
+ <div class="card w-96 bg-base-100 shadow-sm">
+  <div class="card-body">
 
-    </template>
     <div class="w-50% p-2">
 
-      <n-input v-model:value="searchText" type="text" size="tiny" placeholder="Tiny Input" />
+      <input v-model="searchText" type="text" size="tiny" placeholder="Tiny Input" class="input" />
     </div>
-    <n-space>
-      <n-button @click="searchOpen('baidu')" :disabled="searchBtnDisable">
+      <button @click="searchOpen('baidu')" :disabled="searchBtnDisable">
         百度
-      </n-button>
-      <n-button @click="searchOpen('bing')" :disabled="searchBtnDisable">
+      </button>
+      <button @click="searchOpen('bing')" :disabled="searchBtnDisable">
         Bing
-      </n-button>
-      <n-button @click="searchOpen('google')" :disabled="searchBtnDisable">
+      </button>
+      <button @click="searchOpen('google')" :disabled="searchBtnDisable">
         谷歌
-      </n-button>
-      <n-button type="tertiary" @click="funChange('hash')">
+      </button>
+      <button type="tertiary" @click="funChange('hash')">
         哈希
-      </n-button>
-      <n-button type="primary" @click="funChange('base64')">
+      </button>
+      <button type="primary" @click="funChange('base64')">
         Base64
-      </n-button>
-      <n-button type="info" @click="funChange('time')">
+      </button>
+      <button type="info" @click="funChange('time')">
         时间日期
-      </n-button>
-      <n-button type="success" @click="funChange('var')">
+      </button>
+      <button type="success" @click="funChange('var')">
         变量名
-      </n-button>
-      <n-button type="error" @click="funChange('math')">
+      </button>
+      <button type="error" @click="funChange('math')">
         数学计算
-      </n-button>
-    </n-space>
+      </button>
     <div v-for="(item, index) in comName" :key="index">
       <component :is="components[item]" v-if="item === type" />
     </div>
-    <template #footer>
-
-    </template>
-  </n-card>
+   
+  </div>
+ </div>
 </template>
 
 <style scoped>

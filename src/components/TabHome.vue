@@ -1,19 +1,17 @@
 <script setup>
-import Time from './Time.vue'
-import Expand from './Expand.vue'
 
 const img = ref('url(https://w.wallhaven.cc/full/jx/wallhaven-jxl31y.png)')
+
 </script>
 
 <template>
   <div class="base">
     <div class="flex flex-col justify-center items-center ">
       <div class="head h-20" />
-      <Time />
+      <DateTime />
       <Search />
       <Expand />
       <Bookmark/>
-      <Generate />
     </div>
   </div>
 </template>
