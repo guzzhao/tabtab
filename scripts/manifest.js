@@ -1,13 +1,12 @@
-import fs from 'fs-extra'
 
-import { isDev, isFirefox, port, r } from './utils.js'
+import { isDev, isFirefox, port, r, readJSON, writeJSON } from './utils.js'
 
 export async function getManifest() {
-  const pkg = await fs.readJSON(r('package.json'))
+  const pkg = await readJSON(r('package.json'))
 
   // update this file to update this manifest.json
   // can also be conditional based on your need
-  const manifest= {
+  const manifest = {
     manifest_version: 3,
     name: pkg.displayName || pkg.name,
     version: pkg.version,
@@ -22,11 +21,11 @@ export async function getManifest() {
     // },
     background: isFirefox
       ? {
-        scripts: ['dist/background/index.mjs'],
+        scripts: ['dist/background/index.js'],
         type: 'module',
       }
       : {
-        service_worker: './dist/background/index.mjs',
+        service_worker: './dist/background/index.js',
       },
     icons: {
       16: './assets/icon-512.png',

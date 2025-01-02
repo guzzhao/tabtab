@@ -1,8 +1,6 @@
 // generate stub index.html files for dev entry
-import { execSync } from 'node:child_process'
-import fs from 'fs-extra'
 import chokidar from 'chokidar'
-import { isDev, log, port, r } from './utils.js'
+import { isDev, log, port, r, ensureDir, readFile, writeFile, writeJSON } from './utils.js'
 import { getManifest } from './manifest.js'
 
 /**
@@ -16,24 +14,23 @@ async function stubIndexHtml() {
   ]
 
   for (const view of views) {
-    await fs.ensureDir(r(`extension/dist/${view}`))
-    let data = await fs.readFile(r(`src/module/${view}/index.html`), 'utf-8')
+    await ensureDir(r(`extension/dist/${view}`))
+    let data = await readFile(r(`src/module/${view}/index.html`))
     data = data
       .replace('"./main.js"', `"http://localhost:${port}/module/${view}/main.js"`)
       .replace('<div id="app"></div>', '<div id="app">Vite server did not start ..</div>')
-    await fs.writeFile(r(`extension/dist/${view}/index.html`), data, 'utf-8')
+    await writeFile(r(`extension/dist/${view}/index.html`), data)
     log('PRE', `stub ${view}`)
   }
 }
 
 
 async function writeManifest() {
-  await fs.writeJSON(r('extension/manifest.json'), await getManifest(), { spaces: 2 })
+  await writeJSON(r('extension/manifest.json'), await getManifest(), { spaces: 2 })
   log('PRE', 'write manifest.json')
 }
 
 writeManifest()
-
 
 if (isDev) {
   stubIndexHtml()

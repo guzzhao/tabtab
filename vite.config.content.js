@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import { sharedConfig } from './vite.config.mjs'
+import { sharedConfig } from './vite.config.js'
 import { isDev, r } from './scripts/utils'
 import packageJson from './package.json'
 
