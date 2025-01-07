@@ -5,6 +5,7 @@
 html,
 body,
 #app {
+  scrollbar-gutter: auto !important; /* 解决daisyui modal 滚动条问题 */
   margin: 0;
   padding: 0;
 }

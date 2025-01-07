@@ -9,5 +9,5 @@ const color = ref('')
 
 <template>
    {{ color }}
- 
+
 </template>

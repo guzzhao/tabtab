@@ -1,14 +1,11 @@
 <script setup>
-import FullScreen from './FullScreen.vue'
+
 import MaterialSymbolsSettings from '~icons/material-symbols/settings'
 import MaterialSymbolsFullscreen from '~icons/material-symbols/fullscreen'
-import generate from "./tools/generate/index.vue"
 
 import { useCounterStore } from "~/stores/counter"
 
-
 const showModal = ref(false)
-
 
 const count = useCounterStore()
 
@@ -26,12 +23,8 @@ function generateFun() {
       <div>
         <MaterialSymbolsSettings class="" />
       </div>
-      <div>
-        <MaterialSymbolsSettings @click="generateFun" />
-      </div>
     </div>
 
-    <FullScreen />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './NewTab.vue'
-import { setupApp } from '~/logic/common-setup'
+import { setupApp } from '~/module/logic/common-setup'
 
 import '../../styles'
 

@@ -3,62 +3,56 @@ import MaterialSymbolsSearch from '~icons/material-symbols/search'
 import { SRARCH_LIST } from '~/utils/const'
 import { openNewTab } from '~/utils/util.js'
 import { useAppStore } from '~/stores/app';
+import { usePageStore } from '~/stores/page';
 
 
 const app = useAppStore()
+const page = usePageStore()
+const suggestionRef = ref(null)
 
-const showModal = ref(false)
-const searchText = ref('')
-
-
-const searchTextTrim = computed(() => {
-  return searchText.value.trim()
-})
-
-
-
-provide('searchText', searchText)
-
-const searchOptions = SRARCH_LIST.map(e => {
-  return {
-    label: e,
-    value: e
+const searchText = computed({
+  get: () => {
+    return page.baseSearchText
+  },
+  set: (v) => {
+    page.changeBaseSearchText(v)
   }
 })
-const my_modal_2 = ref(null)
-function handleKeyDown(event) {
 
-  if (event.code === 'Tab') {
-    event.preventDefault()
-    my_modal_2.value.showModal()
-  }
+
+function handleKeyUp(event) {
 
   if (event.code === 'Enter') {
     openNewTab(app.searchEngine, searchText.value)
+    return
   }
+
+  if (event.code === 'ArrowDown') {
+    event.preventDefault()
+    suggestionRef.value.changeSelectedItem(1)
+    return
+  }
+
+  if (event.code === 'ArrowUp') {
+    event.preventDefault()
+    suggestionRef.value.changeSelectedItem(-1)
+    return
+  }
+
+  suggestionRef.value.search(searchText.value)
+
 }
 </script>
 
 <template>
   <div class="w-100">
     <label class="input w-full">
-      <SearchIcon  :searchEngine="app.searchEngine"/>
-
-      <input type="search" required placeholder="Search" v-model="searchText" @keydown="handleKeyDown" />
+      <SearchIcon :searchEngine="app.searchEngine" />
+      <input type="search" required placeholder="Search" v-model="searchText" @keyup="handleKeyUp"
+        @keydown="handleKeyDown" />
     </label>
 
-    <Suggestion :isTools="searchText.length !== searchTextTrim.length" v-if="searchTextTrim != ''"
-      class="absolute z-100 w-100" />
-
-
-
-
-    <dialog ref="my_modal_2" class="modal">
-      <ToolsView />
-      <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
+    <Suggestion ref="suggestionRef" class="absolute z-100 w-100" />
 
   </div>
 </template>

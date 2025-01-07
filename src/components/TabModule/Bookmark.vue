@@ -51,22 +51,29 @@ function back() {
 </script>
 
 <template>
-  <div class="mt-10">
-    <div class="flex">
-      <div class="badge badge-info cursor-pointer" v-if="backBtn" @click="back"> 返回 </div>
+  <div class="w-max flex justify-center">
+    <div class="flex mt-10 w-200 flex-wrap">
+      <div class="badge badge-info cursor-pointer m-1" v-if="backBtn" @click="back"> 返回 </div>
       <div v-for="bo in bookMarks">
-        <div class="badge badge-warning cursor-pointer" v-if="bo.url" @click="clickTag(bo.id, bo.url)"> {{ bo.title }}
+        <div class="badge badge-warning cursor-pointer m-1" v-if="bo.url" @click="clickTag(bo.id, bo.url)">
+          {{ bo.title }}
         </div>
-        <div class="badge badge-primary cursor-pointer" v-else @click="clickTag(bo.id, bo.url)"> {{ bo.title }} </div>
+        <div class="badge badge-primary cursor-pointer m-1" v-else @click="clickTag(bo.id, bo.url)">
+          {{ bo.title }}
+        </div>
 
       </div>
 
       <img :src />
     </div>
-
-
-
   </div>
+
+
 </template>
 
-<style scoped></style>
+<style scoped>
+.box {
+  display: flex;
+  align-items: center;
+}
+</style>

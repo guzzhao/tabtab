@@ -1,7 +1,17 @@
-export function myPlugin({ store, options }) {
+
+import { createPinia } from 'pinia'
+
+export function setupApp(app) {
+
+  const pinia = createPinia()
+  pinia.use(piniaPlugin)
+  app.use(pinia)
+}
 
 
-  console.log("my myPlugin")
+export function piniaPlugin({ store, options }) {
+
+
   if (!options.persist) {
     return
   }

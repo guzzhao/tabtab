@@ -5,9 +5,6 @@ import TabHome from '~/components/TabHome.vue'
 <template>
   <div>
     <TabHome />
-    <!-- <h1>
-        newtab
-    </h1> -->
   </div>
 </template>
 

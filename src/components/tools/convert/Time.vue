@@ -1,12 +1,12 @@
 <script setup>
 import { useClipboard, useDateFormat, useNow } from '@vueuse/core'
+import { usePageStore } from '~/stores/page';
 
-const searchText = inject('searchText')
+const page = usePageStore()
 
 const text = computed(() => {
   try {
-    console.log('time', searchText.value)
-    return useDateFormat(Number(searchText.value), 'YYYY-MM-DD HH:mm:ss')
+    return useDateFormat(Number(page.baseSearchText), 'YYYY-MM-DD HH:mm:ss')
   }
   catch (e) {
     return '错误'

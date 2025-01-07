@@ -25,7 +25,7 @@ watch(isFull, (newValue) => {
 
 <template>
   <!-- 时间白色大字 -->
-  <div class=" text-white select-none  mb-5"  @dblclick="toggleFullscreen">
+  <div class=" text-white select-none  mb-5" @dblclick="toggleFullscreen">
     <div class="text-center">
       <div class="text-9xl font-bold select-none " :class="{ full: isFullscreen }" ref="time">
         {{ timeStr }}
@@ -34,7 +34,7 @@ watch(isFull, (newValue) => {
         {{ dateStr }}
       </div>
     </div>
-  
+
   </div>
 </template>
 

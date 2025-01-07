@@ -1,11 +1,12 @@
 <script setup>
 import { evaluate } from 'mathjs'
+import { usePageStore } from '~/stores/page';
 
-const searchText = inject('searchText')
+const page = usePageStore()
 
 const outputValue = computed(() => {
   try {
-    return evaluate(searchText.value)
+    return evaluate(page.baseSearchText)
   }
   catch (e) {
     return '错误'

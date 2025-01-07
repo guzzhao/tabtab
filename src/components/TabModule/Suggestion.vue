@@ -2,44 +2,74 @@
 
 import instance from "~/api/request.js"
 import { useAppStore } from '~/stores/app';
+import { usePageStore } from '~/stores/page';
 import { openNewTab } from '~/utils/util.js'
 
-const props = defineProps(['isTools'])
 
 const app = useAppStore()
-const searchText = inject('searchText')
+const page = usePageStore()
 const suggestionList = ref([])
-const searchSuggestion = ref({})
+const selectedIndex = ref(-1)
+
 
 watchEffect(() => {
-
-  if (searchText.value) {
-    instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText.value}`).then(res => {
-      suggestionList.value = res?.g?.map(e => e.q)
-    })
+  if (page.baseSearchText == '') {
+    suggestionList.value = []
   }
-
 })
 
-function updateSearchSuggsetion(k, v) {
-  searchSuggestion.value[k] = v
-}
 
 function openSearh(i) {
   openNewTab(app.searchEngine, i)
 }
 
-provide('updateSearchSuggsetion', updateSearchSuggsetion)
+function changeSelectedItem(key) {
+
+  if (key == 1) {
+    if (selectedIndex.value < suggestionList.value.length - 1) {
+      selectedIndex.value++
+    } else {
+      selectedIndex.value = 0
+    }
+  } else {
+    if (selectedIndex.value > 0) {
+      selectedIndex.value--
+    } else {
+      selectedIndex.value = suggestionList.value.length - 1
+    }
+
+  }
+
+  page.changeBaseSearchText(suggestionList.value[selectedIndex.value])
+}
+
+function search(searchText) {
+  if (searchText == '') {
+    return
+  }
+  instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText}`).then(res => {
+    suggestionList.value = res?.g?.map(e => e.q)
+    selectedIndex.value = -1
+  })
+
+}
+
+
+defineExpose({
+  changeSelectedItem, search
+})
+
 </script>
 
 <template>
-      <div class="bg-white rounded-lg cursor-pointer opacity-90 mt-1" v-if="searchText != ''">
+  <div class="bg-white rounded-lg cursor-pointer opacity-90 mt-1">
 
-        <div v-for="i in suggestionList" class="m-2 hover:border-gray-400 hover:pl-2 b-gray b-1 p-1" @click="openSearh(i)">
-          {{ i }}
-        </div>
+    <div v-for="(i, index) in suggestionList" class="m-2 hover:border-gray-400 hover:pl-2 b-gray b-1 p-1"
+      :class="{ 'bg-gray-200': selectedIndex == index }" @click="openSearh(i)">
+      {{ i }}
+    </div>
 
-      </div>
+  </div>
 </template>
 
 <style scoped>
