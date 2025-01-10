@@ -5,8 +5,7 @@ import { bgCyan, black } from 'kolorist'
 import fs from 'fs-extra'
 
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const port = Number(process.env.PORT || '') || 3303
 export const r = (...args) => resolve(__dirname, '..', ...args)
