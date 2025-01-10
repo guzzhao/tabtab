@@ -12,11 +12,12 @@ const suggestionList = ref([])
 const selectedIndex = ref(-1)
 
 
-watchEffect(() => {
-  if (page.baseSearchText == '') {
+watch(() => page.baseSearchText, () => {
+  if (!page.baseSearchText) {
     suggestionList.value = []
   }
 })
+
 
 
 function openSearh(i) {
@@ -48,8 +49,12 @@ function search(searchText) {
     return
   }
   instance.get(`https://www.baidu.com/sugrec?prod=pc&wd=${searchText}`).then(res => {
-    suggestionList.value = res?.g?.map(e => e.q)
-    selectedIndex.value = -1
+    if (page.baseSearchText) {
+      suggestionList.value = res?.g?.map(e => e.q)
+      selectedIndex.value = -1
+    }else{
+      suggestionList.value = []
+    }
   })
 
 }
@@ -63,7 +68,6 @@ defineExpose({
 
 <template>
   <div class="bg-white rounded-lg cursor-pointer opacity-90 mt-1">
-
     <div v-for="(i, index) in suggestionList" class="m-2 hover:border-gray-400 hover:pl-2 b-gray b-1 p-1"
       :class="{ 'bg-gray-200': selectedIndex == index }" @click="openSearh(i)">
       {{ i }}

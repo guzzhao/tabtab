@@ -36,3 +36,9 @@ export async function ensureDir(path) {
   return fs.ensureDir(path)
 }
 
+
+export function del(path){
+  fs.rmSync(path,{ recursive: true, force: true })
+}
+
+

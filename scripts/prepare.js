@@ -1,6 +1,6 @@
 // generate stub index.html files for dev entry
 import chokidar from 'chokidar'
-import { isDev, log, port, r, ensureDir, readFile, writeFile, writeJSON } from './utils.js'
+import { isDev, log, port, r, ensureDir, readFile, writeFile, writeJSON,del } from './utils.js'
 import { getManifest } from './manifest.js'
 
 /**
@@ -29,6 +29,9 @@ async function writeManifest() {
   await writeJSON(r('extension/manifest.json'), await getManifest(), { spaces: 2 })
   log('PRE', 'write manifest.json')
 }
+
+del("extension/manifest.json")
+del("extension/dist")
 
 writeManifest()
 

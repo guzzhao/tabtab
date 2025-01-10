@@ -42,6 +42,9 @@ function handleKeyUp(event) {
   suggestionRef.value.search(searchText.value)
 
 }
+
+
+
 </script>
 
 <template>

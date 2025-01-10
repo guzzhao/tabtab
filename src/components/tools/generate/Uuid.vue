@@ -23,7 +23,6 @@ watchEffect(() => {
 </script>
 
 <template>
-  <n-card>
     <input type="range" min="0" max="100" class="range range-primary" v-model="count" /> {{ count }}
     <input type="checkbox" :checked="isUppercase" class="toggle" />
     <div v-if="isUppercase">大写</div>
@@ -38,5 +37,4 @@ watchEffect(() => {
         {{ i }}
       </div>
     </div>
-  </n-card>
 </template>

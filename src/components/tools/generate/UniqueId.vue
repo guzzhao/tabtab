@@ -15,7 +15,6 @@ watchEffect(() => {
 </script>
 
 <template>
-  <n-card>
     <input type="range" min="0" max="100" class="range range-primary" v-model="strLength" /> {{ strLength }}
     <input type="range" min="0" max="100" class="range range-primary" v-model="count" /> {{ count }}
 
@@ -24,5 +23,4 @@ watchEffect(() => {
         {{ i }}
       </div>
     </div>
-  </n-card>
 </template>

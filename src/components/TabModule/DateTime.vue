@@ -1,5 +1,10 @@
 <script setup>
 import { useDateFormat, useFullscreen, useNow } from '@vueuse/core'
+import { useAppStore } from '~/stores/app'
+
+const app = useAppStore()
+
+const color = computed(() => app.theme == 'light' ? "text-white" : "text-black")
 
 const dateStr = useDateFormat(useNow(), 'YYYY-MM-DD')
 const timeStr = useDateFormat(useNow(), 'HH:mm:ss')
@@ -25,7 +30,7 @@ watch(isFull, (newValue) => {
 
 <template>
   <!-- 时间白色大字 -->
-  <div class=" text-white select-none  mb-5" @dblclick="toggleFullscreen">
+  <div class=" select-none  mb-5" @dblclick="toggleFullscreen" :class="color">
     <div class="text-center">
       <div class="text-9xl font-bold select-none " :class="{ full: isFullscreen }" ref="time">
         {{ timeStr }}

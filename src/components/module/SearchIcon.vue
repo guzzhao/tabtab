@@ -14,16 +14,16 @@ const props = defineProps({
 
 <template>
   <div class="dropdown dropdown-center">
-    <div class="cursor-pointer" tabindex="0" role="button">
+    <div tabindex="0" role="button">
       <SimpleIconsBaidu v-if="props.searchEngine === 'baidu'" />
       <UilBing v-if="props.searchEngine === 'bing'" />
       <DeviconPlainGoogle v-if="props.searchEngine === 'google'" />
     </div>
 
-    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1  p-2 shadow-sm">
+    <!-- <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1  p-2 shadow-sm">
       <li><a>baidu</a></li>
       <li><a>bing</a></li>
       <li><a>google</a></li>
-    </ul>
+    </ul> -->
   </div>
 </template>

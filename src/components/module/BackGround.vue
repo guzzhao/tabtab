@@ -1,15 +1,20 @@
 <script setup>
+import { useAppStore } from '~/stores/app';
 
-const img = ref('url(https://w.wallhaven.cc/full/jx/wallhaven-jxl31y.png)')
+const app = useAppStore()
+
+
+const img = computed(() => `url(${app.backgroundUrl})`)
+
 
 </script>
 <template>
-<div class="background"></div>
+  <div class="background"></div>
 
 
 </template>
 <style scoped>
-.background{
+.background {
   position: absolute;
   top: 0;
   left: 0;
@@ -23,4 +28,3 @@ const img = ref('url(https://w.wallhaven.cc/full/jx/wallhaven-jxl31y.png)')
   background-position: center;
 }
 </style>
-
